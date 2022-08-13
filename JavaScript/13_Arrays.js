@@ -113,4 +113,36 @@ function spliceMethod() {
   console.log("After Addition and Removal :-", cities);
 }
 
-spliceMethod();
+// spliceMethod();
+
+function sliceMethod() {
+  var cities = ["Bangalore", "Mysore", "Chennai", "Mumbai"];
+  //first_param -> start index, second_param, end index(exclusive)
+  console.log("cities.slice(0, 3):- ", cities.slice(0, 3)); //0, 3(exclusive)
+  console.log("cities.slice(0, -1):- ", cities.slice(0, -1)); //0, 3(exclusive)
+  console.log("cities.slice(-3, -1):- ", cities.slice(-3, -1)); //1, 3(exclusive)
+}
+// sliceMethod();
+
+//If beginIndex or endIndex is negative then it is treated as
+// beginIndex = arr.length + beginIndex
+// endIndex   = arr.length + endIndex
+
+// 4 + (-1) = 3
+
+// 4 + (-3) = 1
+// 4 + (-1) = 3
+
+function forOfLoop() {
+  var cities = ["Bangalore", "Mysore", "Chennai", "Mumbai"];
+  for (var i = 0; i < cities.length; i++) {
+    console.log("Each element - for loop :- ", cities[i]);
+  }
+
+  console.log("********************* for of loop *********************");
+  for (var eachEle of cities) {
+    console.log("Each element - for-of loop :- ", eachEle);
+  }
+}
+
+forOfLoop();

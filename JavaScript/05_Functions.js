@@ -5,11 +5,13 @@
 //     //code to be executed!
 // }
 
+//a.js
 function addNumbers(a, b) {
   var result = a + b;
   console.log("The result is : ", result);
 }
 
+//b.js
 //This will change the reference of addNumbers function!
 function addNumbers() {
   console.log("This is dummy addnumbers");

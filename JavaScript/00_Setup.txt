@@ -1,0 +1,11 @@
+Download Node JS from this website :- 
+https://nodejs.org/en/download/
+
+
+Open command :- node --version
+
+Execute the JS file using node:- 
+node <filename>
+
+Example:- node 03_DataTypes
+          node .\03_DataTypes.js

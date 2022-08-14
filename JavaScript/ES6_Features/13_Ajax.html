@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Basic Ajax Learnings!</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function loadDataFromBackEnd() {
+        let url = "https://jsonplaceholder.typicode.com/todos";
+        let xmlHttp = new XMLHttpRequest();
+        //HTTP Method, backEndURL, async(true/false)
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send();
+
+        xmlHttp.onreadystatechange = () => {
+          // xmlHttp.readyState => 0, 1, 2, 3, 4
+          // xmlHttp.status => 1XX, 2XX, 3XX, 4XX, 5XX
+          if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            //console.log("xmlHttp.response :- ", xmlHttp.response);
+            let todos = JSON.parse(xmlHttp.response);
+
+            let todosArray = todos.map((todo) => {
+              return `
+                        <tr>
+                            <td>${todo.id}</td>
+                            <td>${todo.userId}</td>
+                            <td>${todo.title}</td>
+                            <td>${todo.completed}</td>
+                        </tr>
+                    `;
+            });
+            let todosHTMLString = todosArray.join("");
+            console.log("todosHTMLString :- ", todosHTMLString);
+            document.getElementById("tableBody").innerHTML = todosHTMLString;
+            document.getElementById("loadBtn").style.display = "none";
+          }
+        };
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1>Ajax Communication!</h1>
+      <button
+        id="loadBtn"
+        class="btn btn-primary"
+        onclick="loadDataFromBackEnd()"
+      >
+        Load Data
+      </button>
+      <table class="table table-striped">
+        <thead>
+          <th>UserID</th>
+          <th>Id</th>
+          <th>Title</th>
+          <th>is Completed?</th>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </body>
+</html>

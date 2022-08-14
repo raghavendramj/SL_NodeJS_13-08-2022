@@ -23,3 +23,7 @@ function Product(price, brand, name) {
 var mobile = new Product(12_000, "Samsung", "M32");
 console.log("Mobile object :- ", mobile);
 mobile.getInfo();
+
+
+
+//var iphone13 = Product.call({}, 25_000, "Apple", "iPhone13"); 

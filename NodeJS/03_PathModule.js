@@ -8,4 +8,4 @@ console.log("process.env.PATH :- ", process.env.PATH.split(path.delimiter));
 
 console.log("path.dirname() :- ", path.dirname("D:\\ApplicationServer\\pax_global_header"));
 
-console.log("Extension :- ", path.extname("03_PathModule.js"))
+console.log("Extension :- ", path.extname("03_PathModule.txt.php"))

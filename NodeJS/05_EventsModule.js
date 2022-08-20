@@ -12,10 +12,10 @@ let invokeLogger = (a, b) => {
   console.log("Value of A:- ", a, " and B :-", b);
 };
 
-//1. Define an event
-emitter.on("log", invokeLogger);
+//1. Define an event and bind an event handler
+emitter.on("logMsg", invokeLogger);
 
 
 //3. Trigger the event!
-emitter.emit('log', 10, 20);
-emitter.emit('log', 'Argument-A', 'Argument-B');
+emitter.emit('logMsg', 10, 20);
+emitter.emit('logMsg', 'Argument-A', 'Argument-B');

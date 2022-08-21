@@ -1,12 +1,30 @@
 const fs = require("fs");
 
-const directoryName = "14_NewDir";
+const directoryName = "./14_NewDir/";
 
-fs.rmdir(directoryName, (err) => {
+fs.readdir(directoryName, (err, files) => {
   if (err) {
-    console.log("rmdir -> Error occurred!");
+    console.log("Error occurred!");
   } else {
-    console.log("rmdir -> success");
+    console.log("Files :- ", files);
+    files.forEach((file) => {
+      const fileNameWithDir = directoryName + file;
+      fs.unlink(fileNameWithDir, (err) => {
+        if (err) {
+          console.log("Error occurred in deleting file :- ", fileNameWithDir);
+        } else {
+          console.log(file, " got deleted successfully");
+        }
+      });
+    });
+
+    fs.rmdir(directoryName, (err) => {
+      if (err) {
+        console.log("rmdir -> Error occurred!");
+      } else {
+        console.log("rmdir -> success");
+      }
+    });
   }
 });
 

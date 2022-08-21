@@ -10,7 +10,7 @@ app.get("/process", (req, res) => {
   let formValues = {
     username: req.query.username,
     lastname: req.query.lastname,
-  }; 
+  };
   //res.send("Your request has been processed! :- " + JSON.stringify(formValues));
   res.send(req.query);
 });

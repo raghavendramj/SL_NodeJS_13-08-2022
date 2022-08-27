@@ -15,13 +15,9 @@ app.get("/api/movies", (req, res) => {
   res.send(movies);
 });
 
-//Put -> Update
-//Middleware in Node JS
-app.use(express.json());
-
-app.put("/api/movies/:id", (req, res) => {
+ 
+app.delete("/api/movies/:id", (req, res) => {
   //Validation for id from the user.
-  console.log("Put method!", req.params);
   const idValidationSchema = Joi.object({
     id: Joi.number().integer(),
   });
@@ -40,26 +36,15 @@ app.put("/api/movies/:id", (req, res) => {
     res.send(`No movie found for the id :- ${req.params.id}`);
   }
 
-  //Validate for name string
-  const schema = Joi.object({
-    name: Joi.string().min(3).required(),
-    genre: Joi.string().min(3).required(),
-  });
-  const result = schema.validate(req.body);
+  console.log("movie", movie);
 
-  if (result.error) {
-    const errorMsg = result.error.details[0].message;
-    console.log("result:- ", errorMsg);
-    res.status(400).send(errorMsg);
-    return;
+  //Delete movie logic
+  const index = movies.indexOf(movie);
+  if (index != -1) {
+    movies.splice(index, 1);
   }
- 
-  //if exists, update the movie
-  movie.name = req.body.name;
-  movie.genre = req.body.genre;
   res.send(movie);
 });
-
 
 const port = process.env.PORT || "5000";
 app.listen(port, () => console.log(`Listening to port ${port}`));

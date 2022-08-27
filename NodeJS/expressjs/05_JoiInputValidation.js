@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const Joi = require("@hapi/joi");
 
 const movies = [
   { id: 1, name: "Star Wars", genre: "Adventure" },
@@ -14,21 +15,21 @@ app.get("/api/movies", (req, res) => {
   res.send(movies);
 });
 
-
-
 //Middleware in Node JS
 app.use(express.json());
+
 app.post("/api/movies", (req, res) => {
-  console.log("Request Body data :- ", req.body);
+  console.log("Request Body :- ", req.body);
+  const schema = Joi.object({
+    name: Joi.string().min(3).required(),
+    genre: Joi.string().min(3).required(),
+  });
+  const result = schema.validate(req.body);
 
-  const { name, genre } = req.body; //Destructuring..
-  console.log(" name of the movie :- ", name, ", genre:- ", genre);
-
-  //Data Validation
-  if (!name || name.length < 3) {
-    res
-      .status(400)
-      .send("The name of the momvie is not present or less than 3 characters");
+  if (result.error) {
+    const errorMsg = result.error.details[0].message;
+    console.log("result:- ", errorMsg);
+    res.status(400).send(errorMsg);
     return;
   }
 
@@ -39,7 +40,7 @@ app.post("/api/movies", (req, res) => {
     genre: genre,
   };
 
-  movies.push(newMovie); 
+  movies.push(newMovie);
   res.send(newMovie);
 });
 

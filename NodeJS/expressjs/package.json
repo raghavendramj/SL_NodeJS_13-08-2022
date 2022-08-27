@@ -13,6 +13,7 @@
   "author": "Raghavendra M J",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "express": "^4.18.1"
   }
 }

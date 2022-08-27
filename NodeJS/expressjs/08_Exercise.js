@@ -39,10 +39,6 @@ app.get("/api/products/category/:category", (req, res) => {
 });
 
 let findProduct = (key, value) => {
-  //   const prod = products.filter((p) => {
-  //     console.log("Key:- ", p[key], " Value is : ", value);
-  //     return p[key] === value;
-  //   });
   const prod = products.filter((p) => p[key] === value);
   if (prod) {
     return prod.length == 1 ? prod[0] : prod;
@@ -53,6 +49,57 @@ let findProduct = (key, value) => {
 
 //Middleware in Node JS
 app.use(express.json());
+
+//Post Method
+app.post("/api/products", (req, res) => {
+  console.log("req.body :-", req.body);
+  const prod = products.filter((p) => p.id === req.params.id);
+  let newProd = {
+    id: products.length + 1,
+    name: req.body.name,
+    category: req.body.category,
+    price: req.body.price,
+  };
+
+  products.push(newProd);
+
+  res.send(newProd);
+});
+
+//Put Method
+app.put("/api/products/:id", (req, res) => {
+  console.log("req.body :-", req.body);
+  const prod = products.find((p) => p.id === parseInt(req.params.id));
+
+  if (!prod) {
+    res.send(`No movie found for the id :- ${req.params.id}`);
+  } else {
+    prod.name = req.body.name;
+    prod.category = req.body.category;
+    prod.price = req.body.price;
+    console.log("updated product :-", prod);
+    res.send(prod);
+  }
+});
+
+//Delete Method
+app.delete("/api/products/:id", (req, res) => {
+  console.log("req.body :-", req.body);
+  const prod = products.find((p) => p.id === parseInt(req.params.id));
+
+  if (!prod) {
+    res.send(`No movie found for the id :- ${req.params.id}`);
+  }
+
+  console.log("prod", prod);
+
+  //Delete movie logic
+  const index = products.indexOf(prod);
+  if (index != -1) {
+    products.splice(index, 1);
+  }
+  res.send(prod);
+});
 
 const port = process.env.PORT || "5000";
 app.listen(port, () => console.log(`Listening to port ${port}`));

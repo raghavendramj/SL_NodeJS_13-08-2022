@@ -32,7 +32,7 @@ app.get("/api/movies/:id", (req, res) => {
 //Create a movie -> POST
 app.use(express.json());
 app.post("/api/movies", (request, response) => {
-  console.log("/api/movies :- ", request.body);
+  console.log("/api/movies :- ", request);
 
   let newMovie = {
     id: movies.length + 1,

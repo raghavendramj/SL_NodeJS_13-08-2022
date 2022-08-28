@@ -11,13 +11,14 @@ const movies = [
 
 //Get all the movies
 app.get("/api/movies", (req, res) => {
+  console.log("Welcome");
   res.send(movies);
 });
 
 
 
 //Middleware in Node JS
-app.use(express.json());
+app.use(express.json()); //Which will add req.body, req.params.id etc...
 app.post("/api/movies", (req, res) => {
   console.log("Request Body data :- ", req.body);
 

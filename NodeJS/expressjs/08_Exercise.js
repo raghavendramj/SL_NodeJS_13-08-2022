@@ -1,5 +1,5 @@
 //Get
-//Get By Id
+//Get By Id, name category, price...
 //Post
 //update
 //delete

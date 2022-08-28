@@ -12,3 +12,13 @@ Router-level middleware
 Error-handling middleware
 Built-in middleware
 Third-party middleware
+
+
+
+Exercise 
+    -> create routers
+        -> CRUD
+    -> move all the logic to movies.js (routers)
+    -> main page 
+        -> add middleware for json()
+        -> attach the router in the main using require + use combination.

@@ -19,5 +19,9 @@ app.get("/users/:id", (req, res) => {
   res.send(["John", "Mitch", "Doe"]);
 });
 
+app.get("/users/data/:id", [validateId, validateDBInfo], (req, res) => {
+  res.send(["John", "Mitch", "Doe"]);
+});
+
 const port = process.env.PORT || "5000";
 app.listen(port, () => console.log(`Listening to port ${port}`));

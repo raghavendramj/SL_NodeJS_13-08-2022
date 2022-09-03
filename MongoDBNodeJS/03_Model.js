@@ -24,8 +24,8 @@ const studentSchema = new mongoose.Schema({
 //Create Model Objects
 
 const Course = mongoose.model("Course", courseSchema);
-const Student = mongoose.model("Student", courseSchema);
-const Teacher = mongoose.model("Teacher", courseSchema);
+const Student = mongoose.model("Student", studentSchema);
+const Teacher = mongoose.model("Teacher", teacherSchema);
 
 //Exporting our model objects!
 

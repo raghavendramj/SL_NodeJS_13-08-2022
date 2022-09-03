@@ -59,8 +59,33 @@ const studentData = [
     courseId: 01,
   },
   {
-    name: "Raj",
-    enroll: 26,
+    name: "Anukur",
+    enroll: 27,
+    courseId: 03,
+  }, {
+    name: "Shreyas",
+    enroll: 28,
+    courseId: 02,
+  }, {
+    name: "Harshith",
+    enroll: 29,
+    courseId: 02,
+  }, {
+    name: "Chethan",
+    
+    enroll: 30,
+    courseId: 01,
+  }, {
+    name: "Kunal",
+    enroll: 31,
+    courseId: 01,
+  }, {
+    name: "Rajas",
+    enroll: 32,
+    courseId: 03,
+  }, {
+    name: "Harry",
+    enroll: 33,
     courseId: 02,
   },
 ];

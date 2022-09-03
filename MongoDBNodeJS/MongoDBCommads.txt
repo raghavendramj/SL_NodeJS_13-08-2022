@@ -1,0 +1,22 @@
+https://www.mongodb.com/try/download/community
+Start the Daemon first: mongoD
+Start the mongo : mongo
+MongoDB -> Databases -> Collections -> Documents -> Fields
+
+Show databases:-
+show dbs;
+
+create database:-
+use testdb;
+
+Create a Collections:-
+
+1st way -> db.createCollection("student"); 
+2nd Way -> db.department.insert({'name':'CSE', 'city':'Bangalore'});
+
+
+Fetch Documents:-
+use testdb;
+db.student.find(); -> All the Documents in the Collection.
+db.student.find().pretty(); -> All the Documents in the Collection in a formatted way!
+

@@ -27,4 +27,15 @@ async function getStudents() {
   console.log("Students are :- ", students);
 }
 
-getStudents();
+// getStudents();
+
+async function getStudentsRE() {
+  //const students = await Student.find({ name: /Har/ }).select({ name: 1 });
+  //const students = await Student.find({ name: /ith$/ }).select({ name: 1 });
+  //const students = await Student.find({ name: /^Har/ }).select({ name: 1 }); //Starts with Har
+  //const students = await Student.find({ name: /ith$/ }).select({ name: 1 }); //Ends with ith
+  const students = await Student.find({ name: /.*hi.*/ }).select({ name: 1 }); //Ends with ith
+  console.log("Students :- ", students);
+}
+
+getStudentsRE();

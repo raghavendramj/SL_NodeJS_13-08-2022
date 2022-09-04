@@ -1,10 +1,13 @@
+ 
 const express = require("express");
-const mongoose = require("mongoose");
 const app = express();
-app.use(express.json());
+app.use(express.json());  
 
+const cors = require("cors");
+app.use(cors());
+
+const mongoose = require("mongoose");
 const dbURL = "mongodb://localhost/exercisedb";
-
 mongoose.connect(dbURL, { useNewUrlParser: true });
 const con = mongoose.connection;
 
@@ -23,3 +26,4 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server started at ${port}`);
 });
+

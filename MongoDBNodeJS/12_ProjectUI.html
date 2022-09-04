@@ -10,28 +10,46 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-      let request = require("request");
       function loadData() {
-        let getData = new Promise((resolve, reject) => {
-          request.get("http://localhost:5000/courses", (err, res, data) => {
-            if (err) reject(err);
-            let content = JSON.parse(data);
-            resolve(content);
-          });
+        let url = "http://localhost:5000/courses/";
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send();
+        xmlHttp.onreadystatechange = () => {
+          if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            console.log("response:- ", xmlHttp.response);
+            populateUI(JSON.parse(xmlHttp.response));
+          }
+        };
+      }
+
+      function populateUI(parsedData) {
+        let i = 1;
+        let htmlData = parsedData.map((eachCourse) => {
+          return `<tr>
+                    <td>${i++}</td>
+                    <td>${eachCourse.name}</td>
+                    <td>${eachCourse.author}</td>
+                    <td>${eachCourse.isPublished}</td>
+                    <td>${eachCourse.tags.join(", ")}</td>
+                    <td>
+                        <button class='btn btn-danger'>Delete</button>
+                        <button class='btn btn-warning'>Update</button>
+                    </td>
+                 </tr> `;
         });
-        getData().then(
-           (res) => console.log("Resonse :- ", res),
-           (err) => console.log("Error occurred:- ", err)
-        )
+
+        console.log("htmlData", htmlData);
+        document.getElementById("tableBody").innerHTML = htmlData;
       }
     </script>
   </head>
   <body>
     <div class="container mt-3">
       <h1>Welcome to Full Stack Application</h1>
-      <button>
-        <a href="">Load Data From BackEnd</a>
-      </button>
+      <!-- <button class="btn btn-primary" onclick="loadData()">
+        Load Data From Backend
+      </button> -->
       <table class="table table-stiped">
         <thead>
           <tr>
@@ -46,5 +64,6 @@
         <tbody id="tableBody"></tbody>
       </table>
     </div>
+    <script>loadData();</script>
   </body>
 </html>

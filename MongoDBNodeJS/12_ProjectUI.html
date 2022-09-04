@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Node Mongo and Express Combo</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      let request = require("request");
+      function loadData() {
+        let getData = new Promise((resolve, reject) => {
+          request.get("http://localhost:5000/courses", (err, res, data) => {
+            if (err) reject(err);
+            let content = JSON.parse(data);
+            resolve(content);
+          });
+        });
+        getData().then(
+           (res) => console.log("Resonse :- ", res),
+           (err) => console.log("Error occurred:- ", err)
+        )
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1>Welcome to Full Stack Application</h1>
+      <button>
+        <a href="">Load Data From BackEnd</a>
+      </button>
+      <table class="table table-stiped">
+        <thead>
+          <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Is Published</th>
+            <th>Tags</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </body>
+</html>

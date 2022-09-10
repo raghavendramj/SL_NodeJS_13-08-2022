@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <title>BroadCast Communication</title>
+  <script src="https://cdn.socket.io/4.5.2/socket.io.min.js"></script>
+</head>
+
+<body>
+  <h1>Chat Application</h1>
+  <div id="error-container"></div>
+
+  <input type="text" name="name" id="username" placeholder="Enter your name!" />
+  <input type="button" name="username" id="btnUsername" onclick="setUsername()" value="Enter Chat Room!" />
+
+  <script>
+    const socket = io();
+    let setUsername = () => {
+      socket.emit("setUsername", document.getElementById("username").value);
+    };
+    socket.on("userExists", (data) => {
+      document.getElementById("error-container").innerHTML = data;
+    });
+    let currentUser;
+    socket.on("userSet", (data) => {
+      console.log("userSet in the client", data);
+      currentUser = data.username;
+      let htmlContent = `
+            <input type='text' id='message'>
+            <button onclick='sendMessage()'>Send</button>
+            <div id='message-container'></div>
+        `;
+      document.body.innerHTML = htmlContent;
+    });
+
+    let sendMessage = () => {
+      const msg = document.getElementById("message").value;
+      if (msg) {
+        socket.emit("msg", { message: msg, user: currentUser });
+      }
+    };
+
+    socket.on("newMsg", (data) => {
+      if (currentUser) {
+        let htmlData = `
+                <div>
+                    <b> ${data.user} </b>:- ${data.message}
+                </div>
+                `;
+        let currentDataDiv = document.getElementById("message-container");
+        currentDataDiv.innerHTML += htmlData;
+      }
+    });
+  </script>
+</body>
+
+</html>

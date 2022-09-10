@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Content</title>
+    <script src="https://cdn.socket.io/4.5.2/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Delayed Communication Example!</h1>
+    <p id="messageFromServer"></p>
+    <script>
+      const socket = io();
+      socket.on("message", (data) => {
+        document.querySelector("#messageFromServer").innerHTML = data;
+      });
+    </script>
+  </body>
+</html>

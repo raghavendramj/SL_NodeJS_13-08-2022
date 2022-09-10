@@ -14,6 +14,17 @@ io.on("connection", (socket) => {
   setTimeout(() => {
     socket.send("Delayed message after 4 seconds!");
   }, 4000);
+
+  //Send -> Server Event :- Step 1
+  const myObject = {
+    desc: "A custom event named manualEvent",
+  };
+  socket.emit("serverEvent", myObject);
+
+  //Receive -> Client Event :- Step 2
+  socket.on("clientEvent", (data) => {
+    console.log("Received from client :- ", data);
+  });
 });
 
 server.listen("4001", () => console.log("Server started!"));

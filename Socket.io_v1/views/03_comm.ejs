@@ -5,12 +5,21 @@
   </head>
   <body>
     <h1>Delayed Communication Example!</h1>
+    <div></div>
     <p id="messageFromServer"></p>
     <script>
       const socket = io();
       socket.on("message", (data) => {
         document.querySelector("#messageFromServer").innerHTML = data;
       });
+
+      //Receive -> Server Event :- Step 2
+      socket.on("serverEvent", (data) => {
+        document.querySelector("div").innerHTML = data.desc;
+      });
+
+      //Send -> Client Event :- Step 1
+      socket.emit("clientEvent", "I am sending this info from my client!");
     </script>
   </body>
 </html>

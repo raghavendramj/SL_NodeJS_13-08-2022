@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>BroadCast Communication</title>
+    <script src="https://cdn.socket.io/4.5.2/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>BroadCast Communication Example!</h1>
+    <p id="messageFromServer"></p>
+
+    <script>
+      const socket = io();
+      socket.on("broadcast", (data) => {
+        document.querySelector("#messageFromServer").innerHTML = data.desc;
+      });
+    </script>
+  </body>
+</html>

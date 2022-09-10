@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <title>BroadCast Communication</title>
+  <script src="https://cdn.socket.io/4.5.2/socket.io.min.js"></script>
+</head>
+
+<body>
+  <h1>BroadCast Communication Example!</h1>
+  <input type="text" name="messageInp" id="messageInp" />
+  <input type="button" name="sendInput" id="sendInput" onclick="sendMessage()" value="Send Message" />
+  <p id="messageFromServer"></p>
+  <p id="clientCount"></p>
+
+  <script>
+    const socket = io();
+    const sendMessage = () => {
+      const msg = document.getElementById("messageInp").value;
+      //1. Client Emit
+      socket.emit("message", msg);
+    };
+
+    //4. Client Broadcast on
+    socket.on("newclientconnect", (data) => {
+      console.log("Data received in client :- ", data);
+      document.querySelector("#messageFromServer").innerHTML = data;
+    });
+
+    socket.on("clientCountEvent", (data) => {
+      document.querySelector("#clientCount").innerHTML = data.desc;
+    });
+  </script>
+</body>
+
+</html>
